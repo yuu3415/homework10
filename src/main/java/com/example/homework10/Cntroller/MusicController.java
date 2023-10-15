@@ -19,6 +19,7 @@ public class MusicController {
 
     @GetMapping("/music")
     public List<Music> getMusic() {
-        return musicService.getMusic();
+        List<Music> music = musicService.getMusic();
+        return music;
     }
 }
