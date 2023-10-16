@@ -2,6 +2,7 @@ package com.example.homework10.Cntroller;
 
 import com.example.homework10.Entity.Music;
 import com.example.homework10.Form.MusicCreateForm;
+import com.example.homework10.Form.MusicUpdateForm;
 import com.example.homework10.Service.MusicServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @Validated
 @RestController
@@ -57,5 +59,13 @@ public class MusicController {
 
             return ResponseEntity.badRequest().body(errorMessage);
         }
+    }
+
+    @PatchMapping("/music/{id}")
+    public ResponseEntity<Map<String, String>>
+
+    updateMusic(@PathVariable int id, @Validated @RequestBody MusicUpdateForm musicUpdateForm) throws Exception {
+        musicService.updateMusic(id, musicUpdateForm.getTitle(), musicUpdateForm.getSinger());
+        return ResponseEntity.ok(Map.of("message", "music successfully updated"));
     }
 }

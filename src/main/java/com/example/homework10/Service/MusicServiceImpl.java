@@ -25,4 +25,11 @@ public class MusicServiceImpl implements MusicService {
         musicMapper.createMusic(MusicData);
         return MusicData;
     }
+
+    @Override
+    public Music updateMusic(int id, String title, String singer) {
+        Music MusicData = new Music(id, title, singer);
+        musicMapper.updateMusic(MusicData);
+        return MusicData;
+    }
 }
