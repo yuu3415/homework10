@@ -1,4 +1,13 @@
 package com.example.homework10.Service;
 
-public class MusicService {
+import com.example.homework10.Entity.Music;
+
+import java.util.List;
+
+public interface MusicService {
+    List<Music> findAll();
+
+    Music createMusic(String title, String singer);
+
+
 }
