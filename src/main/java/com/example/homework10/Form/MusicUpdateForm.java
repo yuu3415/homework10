@@ -1,8 +1,11 @@
 package com.example.homework10.Form;
 
+import com.example.homework10.Entity.Music;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+@Data
 public class MusicUpdateForm {
     private int id;
     @NotBlank(message = "曲名は必須です")
@@ -18,15 +21,8 @@ public class MusicUpdateForm {
         this.singer = singer;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public String getSinger() {
-        return this.singer;
+    public Music updateMusicInstance(int id, String title, String singer) {
+        Music music = new Music(id, title, singer);
+        return music;
     }
 }

@@ -23,6 +23,9 @@ public class Music {
 
     }
 
+    public Music() {
+    }
+
     public int getId() {
         return id;
     }

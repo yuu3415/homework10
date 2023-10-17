@@ -1,12 +1,14 @@
 package com.example.homework10.Cntroller;
 
 import com.example.homework10.Entity.Music;
+import com.example.homework10.Exception.NotMusicFoundException;
 import com.example.homework10.Form.MusicCreateForm;
 import com.example.homework10.Form.MusicUpdateForm;
 import com.example.homework10.Service.MusicServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -41,24 +43,16 @@ public class MusicController {
         return ResponseEntity.created(url).body("music successfully created");
     }
 
-    @ControllerAdvice
-    public class MethodArgumentNotValidExceptionHandler {
 
-        @ExceptionHandler(MethodArgumentNotValidException.class)
-        public ResponseEntity<String> handleValidationExceptions(
-                MethodArgumentNotValidException ex) {
-            String errorMessage = ex.getBindingResult().getFieldErrors().stream()
-                    .map(x -> x.getDefaultMessage())
-                    .reduce("エラー", (a, b) -> {
-                        if (a.isEmpty()) {
-                            return b;
-                        } else {
-                            return a + ", " + b;
-                        }
-                    });
-
-            return ResponseEntity.badRequest().body(errorMessage);
-        }
+    @ExceptionHandler(value = NotMusicFoundException.class)
+    public ResponseEntity<Map<String, String>> handleException(NotMusicFoundException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", String.valueOf(System.currentTimeMillis()),
+                "status", String.valueOf(HttpStatus.NOT_FOUND.value()),
+                "error", HttpStatus.NOT_FOUND.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @PatchMapping("/music/{id}")
