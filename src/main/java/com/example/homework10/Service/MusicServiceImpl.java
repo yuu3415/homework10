@@ -1,6 +1,7 @@
 package com.example.homework10.Service;
 
 import com.example.homework10.Entity.Music;
+import com.example.homework10.Form.MusicUpdateForm;
 import com.example.homework10.Mapper.MusicMapper;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,9 @@ public class MusicServiceImpl implements MusicService {
 
 
     @Override
-    public void updateMusic(int id, String title, String singer) throws Exception {
+    public Music updateMusic(MusicUpdateForm musicUpdateForm) {
+        Music updateMusic = musicUpdateForm.convertToMusic();
+        musicMapper.updateMusic(updateMusic);
+        return updateMusic;
     }
-
 }

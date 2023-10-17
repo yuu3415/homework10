@@ -15,6 +15,6 @@ public interface MusicMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createMusic(Music createMusic);
 
-    @Update("Update music set title = #{title}, singer = #{singer} where id = #{id}")
+    @Update("Update musics set musics = #{title}, singer = #{singer} where id = #{id}")
     void setUpdateMusic(Music updateMusic);
 }
