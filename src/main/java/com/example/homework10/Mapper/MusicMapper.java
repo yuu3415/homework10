@@ -16,5 +16,5 @@ public interface MusicMapper {
     void createMusic(Music createMusic);
 
     @Update("Update music set title = #{title}, singer = #{singer} where id = #{id}")
-    void updateMusic(Music updateMusic);
+    void setUpdateMusic(Music updateMusic);
 }

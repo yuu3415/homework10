@@ -4,7 +4,7 @@ import com.example.homework10.Entity.Music;
 import com.example.homework10.Exception.NotMusicFoundException;
 import com.example.homework10.Form.MusicCreateForm;
 import com.example.homework10.Form.MusicUpdateForm;
-import com.example.homework10.Service.MusicServiceImpl;
+import com.example.homework10.Service.MusicService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +20,11 @@ import java.util.Map;
 @RestController
 public class MusicController {
 
-    private final MusicServiceImpl musicService;
+    private MusicService musicService;
 
 
-    public MusicController(MusicServiceImpl musicServiceImpl) {
-        this.musicService = musicServiceImpl;
+    public MusicController(MusicService musicService) {
+        this.musicService = musicService;
     }
 
     @GetMapping("/music")
@@ -56,9 +56,7 @@ public class MusicController {
     }
 
     @PatchMapping("/music/{id}")
-    public ResponseEntity<Map<String, String>>
-
-    updateMusic(@PathVariable int id, @Validated @RequestBody MusicUpdateForm musicUpdateForm) throws Exception {
+    public ResponseEntity<Map<String, String>> update(@PathVariable int id, @Validated @RequestBody MusicUpdateForm musicUpdateForm) throws Exception {
         musicService.updateMusic(id, musicUpdateForm.getTitle(), musicUpdateForm.getSinger());
         return ResponseEntity.ok(Map.of("message", "music successfully updated"));
     }

@@ -27,6 +27,7 @@ public class Music {
     }
 
     public int getId() {
+
         return id;
     }
 
@@ -35,6 +36,7 @@ public class Music {
     }
 
     public String getSinger() {
+
         return singer;
     }
 

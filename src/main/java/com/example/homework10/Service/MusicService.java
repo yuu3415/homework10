@@ -9,7 +9,5 @@ public interface MusicService {
 
     Music createMusic(String title, String singer);
 
-    Music updateMusic(int id, String title, String singer);
-
-
+    void updateMusic(int id, String title, String singer) throws Exception;
 }
