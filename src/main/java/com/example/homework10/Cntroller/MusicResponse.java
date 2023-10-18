@@ -1,5 +1,7 @@
 package com.example.homework10.Cntroller;
 
+import com.example.homework10.Entity.Music;
+
 public class MusicResponse {
     private int id;
     private String title;
@@ -9,6 +11,12 @@ public class MusicResponse {
         this.id = id;
         this.title = title;
         this.singer = singer;
+    }
+
+    public MusicResponse(Music music) {
+        this.id = music.getId();
+        this.title = music.getTitle();
+        this.singer = music.getSinger();
     }
 
     public int getId() {
