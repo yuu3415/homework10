@@ -16,6 +16,7 @@ public class Music {
 
     }
 
+
     public Music(int id, String title, String singer) {
         this.id = id;
         this.title = title;

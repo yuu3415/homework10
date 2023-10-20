@@ -29,10 +29,9 @@ public class MusicServiceImpl implements MusicService {
 
 
     @Override
-    public Music updateMusic(MusicUpdateForm musicUpdateForm) throws Exception {
-        Music updateMusic = musicUpdateForm.convertToMusic();
+    public Music updateMusic(int id, MusicUpdateForm musicUpdateForm) throws Exception {
+        Music updateMusic = musicUpdateForm.convertToMusic(id, musicUpdateForm);
         musicMapper.updateMusic(updateMusic);
         return updateMusic;
-
     }
 }

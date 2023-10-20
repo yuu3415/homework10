@@ -9,7 +9,7 @@ public class MusicUpdateForm {
     private String title;
     private String singer;
 
-    public Music convertToMusic() {
-        return new Music(this.id, this.title, this.singer);
+    public Music convertToMusic(int id, MusicUpdateForm musicUpdateForm) {
+        return new Music(id, this.title, this.singer);
     }
 }
