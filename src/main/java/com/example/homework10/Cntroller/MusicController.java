@@ -57,7 +57,14 @@ public class MusicController {
 
     @PatchMapping("/music/{id}")
     public ResponseEntity<Map<String, String>> update(@PathVariable int id, @Validated @RequestBody MusicUpdateForm musicUpdateForm) throws Exception {
-        musicService.updateMusic(id, musicUpdateForm);
+        Music updateMusic = musicUpdateForm.convertToMusic(id, musicUpdateForm);
+        musicService.updateMusic(id, updateMusic);
         return ResponseEntity.ok(Map.of("message", "music successfully updated"));
+    }
+
+    @DeleteMapping("/music/{id}")
+    public ResponseEntity<Map<String, String>> delete(@PathVariable int id) throws Exception {
+        musicService.deleteMusic(id);
+        return ResponseEntity.ok(Map.of("message", "music successfully deleted"));
     }
 }
