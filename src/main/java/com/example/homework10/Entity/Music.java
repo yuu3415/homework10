@@ -16,6 +16,7 @@ public class Music {
 
     }
 
+
     public Music(int id, String title, String singer) {
         this.id = id;
         this.title = title;
@@ -23,7 +24,11 @@ public class Music {
 
     }
 
+    public Music() {
+    }
+
     public int getId() {
+
         return id;
     }
 
@@ -32,6 +37,7 @@ public class Music {
     }
 
     public String getSinger() {
+
         return singer;
     }
 

@@ -25,4 +25,16 @@ public class MusicServiceImpl implements MusicService {
         musicMapper.createMusic(MusicData);
         return MusicData;
     }
+
+
+    @Override
+    public Music updateMusic(int id, Music updateMusic) throws Exception {
+        musicMapper.updateMusic(updateMusic);
+        return updateMusic;
+    }
+
+    @Override
+    public void deleteMusic(int id) {
+        musicMapper.deleteMusic(id);
+    }
 }
