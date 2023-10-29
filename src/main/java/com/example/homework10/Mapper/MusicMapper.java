@@ -11,6 +11,9 @@ public interface MusicMapper {
     @Select("select * from music")
     List<Music> findAll();
 
+    @Select("select * from music where id = #{id}")
+    Music findById(int id);
+
     @Insert("Insert INTO music (title, singer) values (#{title}, #{singer})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createMusic(Music createMusic);

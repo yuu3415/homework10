@@ -20,6 +20,11 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
+    public Music findById(int id) {
+        return musicMapper.findById(id);
+    }
+
+    @Override
     public Music createMusic(String title, String singer) {
         Music MusicData = new Music(title, singer);
         musicMapper.createMusic(MusicData);

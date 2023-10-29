@@ -32,6 +32,15 @@ public class MusicController {
         return musicService.findAll();
     }
 
+    @GetMapping("/music/{id}")
+    public Music music(@PathVariable int id) throws Exception {
+        Music music = musicService.findById(id);
+        if (music == null) {
+            throw new NotMusicFoundException("music not found");
+        }
+        return music;
+    }
+
     @PostMapping("/music")
     public ResponseEntity<String> create(@Validated @RequestBody MusicCreateForm musicCreateForm, UriComponentsBuilder uriComponentsBuilder) {
         Music music = musicService.createMusic(musicCreateForm.getTitle(), musicCreateForm.getSinger());
