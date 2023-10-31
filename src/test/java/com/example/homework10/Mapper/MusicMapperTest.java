@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MusicMapperTest {
     @Autowired
-    private MusicMapper musicMapper;
+    MusicMapper musicMapper;
 
     @Test
     @Sql(
@@ -31,8 +31,7 @@ public class MusicMapperTest {
                 .contains(
                         new Music(5, "ハルカ", "YOASOBI"),
                         new Music(6, "炎", "LiSA"),
-                        new Music(7, "紅蓮華", "LiSA")
+                        new Music(7, "ドライフラワー", "優里")
                 );
-
     }
 }

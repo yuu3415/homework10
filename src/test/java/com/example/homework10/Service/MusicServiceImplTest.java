@@ -10,7 +10,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 
 @ExtendWith(MockitoExtension.class)
 public class MusicServiceImplTest {
@@ -26,11 +30,13 @@ public class MusicServiceImplTest {
                 new Music(5, "ハルカ", "YOASOBI"),
                 new Music(6, "炎", "LiSA"),
                 new Music(7, "紅蓮華", "LiSA")
+
         );
         doReturn(musicList).when(musicMapper).findAll();
 
         List<Music> actual = musicService.findAll();
-        assert actual.equals(musicList);
+        assertThat(actual).isEqualTo(musicList);
         verify(musicMapper, times(1)).findAll();
     }
+
 }

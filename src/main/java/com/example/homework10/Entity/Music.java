@@ -1,6 +1,8 @@
 package com.example.homework10.Entity;
 
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 public class Music {
     private int id;
 
@@ -15,7 +17,6 @@ public class Music {
         this.singer = singer;
 
     }
-
 
     public Music(int id, String title, String singer) {
         this.id = id;
