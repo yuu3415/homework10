@@ -1,8 +1,7 @@
 package com.example.homework10.Entity;
 
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
-@EqualsAndHashCode
 public class Music {
     private int id;
 
@@ -52,5 +51,20 @@ public class Music {
 
     public void setSinger(String singer) {
         this.singer = singer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Music music)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
+        return getId() == music.getId() &&
+                getTitle().equals(music.getTitle()) &&
+                getSinger().equals(music.getSinger());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, singer);
     }
 }

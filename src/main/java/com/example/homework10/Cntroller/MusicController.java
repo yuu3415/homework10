@@ -33,12 +33,8 @@ public class MusicController {
     }
 
     @GetMapping("/music/{id}")
-    public Music music(@PathVariable int id) throws Exception {
-        Music music = musicService.findById(id);
-        if (music == null) {
-            throw new NotMusicFoundException("music not found");
-        }
-        return music;
+    public Music music(@PathVariable int id) {
+        return musicService.findById(id);
     }
 
     @PostMapping("/music")
