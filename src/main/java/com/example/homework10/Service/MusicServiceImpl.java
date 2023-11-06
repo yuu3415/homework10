@@ -1,10 +1,12 @@
 package com.example.homework10.Service;
 
 import com.example.homework10.Entity.Music;
+import com.example.homework10.Exception.NotMusicFoundException;
 import com.example.homework10.Mapper.MusicMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MusicServiceImpl implements MusicService {
@@ -21,7 +23,8 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Music findById(int id) {
-        return musicMapper.findById(id);
+        Optional<Music> music = Optional.ofNullable(musicMapper.findById(id));
+        return music.orElseThrow(() -> new NotMusicFoundException("Music not found"));
     }
 
     @Override
