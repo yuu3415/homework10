@@ -45,4 +45,15 @@ public class MusicServiceImpl implements MusicService {
     public void deleteMusic(int id) {
         musicMapper.deleteMusic(id);
     }
+
+    @Override
+    public int createMusic(Music music) {
+        try {
+            musicMapper.createMusic(music);
+        } catch (Exception e) {
+            throw new NotMusicFoundException("ミュージックは既にあります");
+        }
+        return music.getId();
+    }
+
 }

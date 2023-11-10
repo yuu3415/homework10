@@ -14,4 +14,6 @@ public interface MusicService {
     Music updateMusic(int id, Music musicUpdateForm) throws Exception;
 
     void deleteMusic(int id);
+
+    int createMusic(Music music);
 }
