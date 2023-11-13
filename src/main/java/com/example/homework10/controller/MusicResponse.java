@@ -1,4 +1,4 @@
-package com.example.homework10.Cntroller;
+package com.example.homework10.controller;
 
 import com.example.homework10.Entity.Music;
 

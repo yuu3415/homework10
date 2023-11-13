@@ -1,6 +1,7 @@
 package com.example.homework10.Service;
 
 import com.example.homework10.Entity.Music;
+import com.example.homework10.Exception.MusicDuplicationException;
 import com.example.homework10.Exception.NotMusicFoundException;
 import com.example.homework10.Mapper.MusicMapper;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class MusicServiceImpl implements MusicService {
         try {
             musicMapper.createMusic(music);
         } catch (Exception e) {
-            throw new NotMusicFoundException("ミュージックは既にあります");
+            throw new MusicDuplicationException("ミュージックは既にあります");
         }
         return music.getId();
     }

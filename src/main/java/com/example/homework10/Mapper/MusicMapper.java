@@ -8,20 +8,20 @@ import java.util.List;
 @Mapper
 
 public interface MusicMapper {
-    @Select("select * from music")
+    @Select("SELECT * FROM music")
     List<Music> findAll();
 
-    @Select("select * from music where id = #{id}")
+    @Select("SELECT * FROM music WHERE id = #{id}")
     Music findById(int id);
 
-    @Insert("Insert INTO music (title, singer) values (#{title}, #{singer})")
+    @Insert("Insert INTO music (title, singer) VALUES (#{title}, #{singer})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createMusic(Music createMusic);
 
-    @Update("Update music set title = #{title}, singer = #{singer} where id = #{id}")
+    @Update("Update music SET title = #{title}, singer = #{singer} WHERE id = #{id}")
     void updateMusic(Music updateMusic);
 
-    @Delete("Delete from music where id = #{id}")
+    @Delete("Delete FROM music WHERE id = #{id}")
     void deleteMusic(int id);
 
 }
