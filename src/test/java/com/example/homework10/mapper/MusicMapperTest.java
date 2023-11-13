@@ -1,6 +1,6 @@
-package com.example.homework10.Mapper;
+package com.example.homework10.mapper;
 
-import com.example.homework10.Entity.Music;
+import com.example.homework10.entity.Music;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.example.homework10.Service;
+package com.example.homework10.service;
 
-import com.example.homework10.Entity.Music;
+import com.example.homework10.entity.Music;
 
 import java.util.List;
 

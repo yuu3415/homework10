@@ -1,6 +1,6 @@
-package com.example.homework10.Mapper;
+package com.example.homework10.mapper;
 
-import com.example.homework10.Entity.Music;
+import com.example.homework10.entity.Music;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

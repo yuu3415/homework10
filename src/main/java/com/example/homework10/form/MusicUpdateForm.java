@@ -1,6 +1,6 @@
-package com.example.homework10.Form;
+package com.example.homework10.form;
 
-import com.example.homework10.Entity.Music;
+import com.example.homework10.entity.Music;
 import lombok.Data;
 
 @Data

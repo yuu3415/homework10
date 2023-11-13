@@ -1,4 +1,4 @@
-package com.example.homework10.Entity;
+package com.example.homework10.entity;
 
 import java.util.Objects;
 

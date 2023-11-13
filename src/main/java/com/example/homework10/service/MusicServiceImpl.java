@@ -1,9 +1,9 @@
-package com.example.homework10.Service;
+package com.example.homework10.service;
 
-import com.example.homework10.Entity.Music;
-import com.example.homework10.Exception.MusicDuplicationException;
-import com.example.homework10.Exception.NotMusicFoundException;
-import com.example.homework10.Mapper.MusicMapper;
+import com.example.homework10.entity.Music;
+import com.example.homework10.exception.MusicDuplicationException;
+import com.example.homework10.exception.NotMusicFoundException;
+import com.example.homework10.mapper.MusicMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.homework10.Form;
+package com.example.homework10.form;
 
 public class MusicCreateForm {
     private String title;

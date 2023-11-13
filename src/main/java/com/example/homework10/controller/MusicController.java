@@ -1,10 +1,10 @@
 package com.example.homework10.controller;
 
-import com.example.homework10.Entity.Music;
-import com.example.homework10.Exception.NotMusicFoundException;
-import com.example.homework10.Form.MusicCreateForm;
-import com.example.homework10.Form.MusicUpdateForm;
-import com.example.homework10.Service.MusicService;
+import com.example.homework10.entity.Music;
+import com.example.homework10.exception.NotMusicFoundException;
+import com.example.homework10.form.MusicCreateForm;
+import com.example.homework10.form.MusicUpdateForm;
+import com.example.homework10.service.MusicService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

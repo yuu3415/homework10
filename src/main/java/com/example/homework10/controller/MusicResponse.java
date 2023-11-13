@@ -1,6 +1,6 @@
 package com.example.homework10.controller;
 
-import com.example.homework10.Entity.Music;
+import com.example.homework10.entity.Music;
 
 public class MusicResponse {
     private int id;

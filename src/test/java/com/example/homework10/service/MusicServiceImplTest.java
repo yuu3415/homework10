@@ -1,8 +1,8 @@
-package com.example.homework10.Service;
+package com.example.homework10.service;
 
-import com.example.homework10.Entity.Music;
-import com.example.homework10.Exception.NotMusicFoundException;
-import com.example.homework10.Mapper.MusicMapper;
+import com.example.homework10.entity.Music;
+import com.example.homework10.exception.NotMusicFoundException;
+import com.example.homework10.mapper.MusicMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
