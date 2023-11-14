@@ -14,14 +14,14 @@ public interface MusicMapper {
     @Select("SELECT * FROM music WHERE id = #{id}")
     Music findById(int id);
 
-    @Insert("Insert INTO music (title, singer) VALUES (#{title}, #{singer})")
+    @Insert("INSERT INTO music (title, singer) VALUES (#{title}, #{singer})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createMusic(Music createMusic);
 
-    @Update("Update music SET title = #{title}, singer = #{singer} WHERE id = #{id}")
+    @Update("UPDATE music SET title = #{title}, singer = #{singer} WHERE id = #{id}")
     void updateMusic(Music updateMusic);
 
-    @Delete("Delete FROM music WHERE id = #{id}")
+    @Delete("DELETE FROM music WHERE id = #{id}")
     void deleteMusic(int id);
 
 }

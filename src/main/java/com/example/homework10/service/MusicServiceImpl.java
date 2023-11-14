@@ -51,8 +51,8 @@ public class MusicServiceImpl implements MusicService {
     public int createMusic(Music music) {
         try {
             musicMapper.createMusic(music);
-        } catch (Exception e) {
-            throw new MusicDuplicationException("ミュージックは既にあります");
+        } catch (MusicDuplicationException e) {
+            throw new MusicDuplicationException("ミュージックは既にあります", e);
         }
         return music.getId();
     }
