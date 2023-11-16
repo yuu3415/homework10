@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Music {
     private int id;
-
     private String title;
 
     private String singer;
