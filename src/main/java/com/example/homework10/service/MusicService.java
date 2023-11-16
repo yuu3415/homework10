@@ -15,5 +15,5 @@ public interface MusicService {
 
     void deleteMusic(int id);
 
-    int createMusic(Music music);
+    int createMusic(Music music) throws Exception;
 }

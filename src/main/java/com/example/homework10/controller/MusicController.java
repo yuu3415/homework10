@@ -45,7 +45,7 @@ public class MusicController {
                 .build()
                 .toUri();
 
-        return ResponseEntity.created(url).body("music successfully created");
+        return ResponseEntity.created(url).body("music successfully created" + " id:" + music.getId());
     }
 
 
