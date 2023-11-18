@@ -2,10 +2,9 @@ DROP TABLE IF EXISTS music;
 
 CREATE TABLE music (
   id int unsigned AUTO_INCREMENT,
-  title VARCHAR(20) NOT NULL,
+  title VARCHAR(20) NOT NULL,UNIQUE KEY `title` (`title`),
   singer VARCHAR(20) NOT NULL,
   PRIMARY KEY(id)
-  UNIQUE KEY(title)
 );
 
 

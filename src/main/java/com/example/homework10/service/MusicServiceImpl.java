@@ -3,9 +3,9 @@ package com.example.homework10.service;
 import com.example.homework10.entity.Music;
 import com.example.homework10.exception.NotMusicFoundException;
 import com.example.homework10.mapper.MusicMapper;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +48,8 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public int createMusic(Music music) throws Exception {
-        try {
-            musicMapper.createMusic(music);
-        } catch (DuplicateKeyException e) {
-            throw new DuplicateKeyException("ミュージックは既にあります", e);
-        }
+    public int createMusic(Music music) throws Exception, SQLIntegrityConstraintViolationException {
+        musicMapper.createMusic(music);
         return music.getId();
     }
 
