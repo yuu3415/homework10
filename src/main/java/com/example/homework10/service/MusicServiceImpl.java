@@ -1,11 +1,12 @@
 package com.example.homework10.service;
 
 import com.example.homework10.entity.Music;
+import com.example.homework10.exception.MusicDuplicationException;
 import com.example.homework10.exception.NotMusicFoundException;
 import com.example.homework10.mapper.MusicMapper;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,15 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Music createMusic(String title, String singer) {
-        Music MusicData = new Music(title, singer);
-        musicMapper.createMusic(MusicData);
-        return MusicData;
+        try {
+            Music music = new Music();
+            music.setTitle(title);
+            music.setSinger(singer);
+            musicMapper.createMusic(music);
+            return music;
+        } catch (DuplicateKeyException e) {
+            throw new MusicDuplicationException("このタイトルのミュージックは既に存在しています");
+        }
     }
 
 
@@ -45,12 +52,6 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void deleteMusic(int id) {
         musicMapper.deleteMusic(id);
-    }
-
-    @Override
-    public int createMusic(Music music) throws Exception, SQLIntegrityConstraintViolationException {
-        musicMapper.createMusic(music);
-        return music.getId();
     }
 
 }

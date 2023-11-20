@@ -24,4 +24,5 @@ public interface MusicMapper {
     @Delete("DELETE FROM music WHERE id = #{id}")
     void deleteMusic(int id);
 
+    
 }

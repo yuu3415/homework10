@@ -9,11 +9,11 @@ public interface MusicService {
 
     Music findById(int id);
 
-    Music createMusic(String title, String singer);
+    Music createMusic(String title, String singer) throws Exception;
 
     Music updateMusic(int id, Music musicUpdateForm) throws Exception;
 
     void deleteMusic(int id);
 
-    int createMusic(Music music) throws Exception;
+
 }
