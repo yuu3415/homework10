@@ -38,12 +38,12 @@ class MusicApiIntegrationTest {
                     {
                         "id":1,
                         "title":"The Beginning",
-                        "singer":"OneOkRock"
+                        "singer":"ONE OK ROCK
                     },
                     {
                         "id":2,
                         "title":"Pretender",
-                        "singer":"Official髭弾dism"
+                        "singer":"Official髭男dism"
                     },
                     {
                         "id":3,
@@ -66,7 +66,7 @@ class MusicApiIntegrationTest {
                 {
                     "id":1,
                     "title":"The Beginning",
-                    "singer":"OneOkRock"
+                    "singer":"ONE OK ROCK
                 }
                 """, response, JSONCompareMode.STRICT);
     }
