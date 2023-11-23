@@ -1,4 +1,4 @@
-package com.example.homework10.Exception;
+package com.example.homework10.exception;
 
 public class NotMusicFoundException extends RuntimeException {
     public NotMusicFoundException() {

@@ -1,10 +1,11 @@
-package com.example.homework10.Cntroller;
+package com.example.homework10.controller;
 
-import com.example.homework10.Entity.Music;
-import com.example.homework10.Exception.NotMusicFoundException;
-import com.example.homework10.Form.MusicCreateForm;
-import com.example.homework10.Form.MusicUpdateForm;
-import com.example.homework10.Service.MusicService;
+import com.example.homework10.entity.Music;
+import com.example.homework10.exception.MusicDuplicationException;
+import com.example.homework10.exception.NotMusicFoundException;
+import com.example.homework10.form.MusicCreateForm;
+import com.example.homework10.form.MusicUpdateForm;
+import com.example.homework10.service.MusicService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,15 +33,20 @@ public class MusicController {
         return musicService.findAll();
     }
 
+    @GetMapping("/music/{id}")
+    public Music music(@PathVariable int id) {
+        return musicService.findById(id);
+    }
+
     @PostMapping("/music")
-    public ResponseEntity<String> create(@Validated @RequestBody MusicCreateForm musicCreateForm, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<String> create(@Validated @RequestBody MusicCreateForm musicCreateForm, UriComponentsBuilder uriComponentsBuilder) throws Exception {
         Music music = musicService.createMusic(musicCreateForm.getTitle(), musicCreateForm.getSinger());
         URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
                 .path("/music/" + music.getId())
                 .build()
                 .toUri();
 
-        return ResponseEntity.created(url).body("music successfully created");
+        return ResponseEntity.created(url).body("music successfully created" + " id:" + music.getId());
     }
 
 
@@ -53,6 +59,17 @@ public class MusicController {
                 "message", e.getMessage(),
                 "path", request.getRequestURI());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = MusicDuplicationException.class)
+    public ResponseEntity<Map<String, String>> handleException(MusicDuplicationException e, HttpServletRequest request) {
+        Map<String, String> body = Map.of(
+                "timestamp", String.valueOf(System.currentTimeMillis()),
+                "status", String.valueOf(HttpStatus.CONFLICT.value()),
+                "error", HttpStatus.CONFLICT.getReasonPhrase(),
+                "message", e.getMessage(),
+                "path", request.getRequestURI());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 
     @PatchMapping("/music/{id}")
