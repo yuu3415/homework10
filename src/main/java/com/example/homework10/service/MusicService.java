@@ -11,6 +11,7 @@ public interface MusicService {
 
     Music createMusic(String title, String singer) throws Exception;
 
+
     Music updateMusic(int id, Music musicUpdateForm) throws Exception;
 
     void deleteMusic(int id);

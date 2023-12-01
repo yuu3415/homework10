@@ -14,6 +14,9 @@ public interface MusicMapper {
     @Select("SELECT * FROM music WHERE id = #{id}")
     Music findById(int id);
 
+    @Select("SELECT * FROM music WHERE title = #{title}")
+    Music findByTitle(String title);
+
     @Insert("INSERT INTO music (title, singer) VALUES (#{title}, #{singer})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createMusic(Music createMusic);
@@ -23,6 +26,4 @@ public interface MusicMapper {
 
     @Delete("DELETE FROM music WHERE id = #{id}")
     void deleteMusic(int id);
-
-    
 }

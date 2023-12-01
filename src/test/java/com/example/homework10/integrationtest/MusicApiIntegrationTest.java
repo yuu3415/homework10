@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -78,6 +79,31 @@ class MusicApiIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/music/100"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andReturn().getResponse().getErrorMessage();
+    }
+
+    @Test
+    @DataSet(value = "datasets/music.yml")
+    @Transactional
+    void ミュージックが作成されること() throws Exception {
+        String response =
+                mockMvc.perform(MockMvcRequestBuilders.post("/music")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("""
+                                        {
+                                            "title": "ハルカ",
+                                            "singer": "YOASOBI"
+                                        }
+                                        """))
+                        .andExpect(MockMvcResultMatchers.status().isCreated())
+                        .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
+
+        JSONAssert.assertEquals("""
+                {
+                    "id":4,
+                    "title":"ハルカ",
+                    "singer":"YOASOBI"
+                }
+                """, response, JSONCompareMode.STRICT);
     }
 
 }
