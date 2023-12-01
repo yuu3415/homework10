@@ -61,7 +61,7 @@ public class MusicServiceImplTest {
         Music music = new Music(5, "ハルカ", "YOASOBI");
         doNothing().when(musicMapper).createMusic(music);
 
-        musicService.createMusic(music);
+        musicService.createMusic(music.getTitle(), music.getSinger());
         verify(musicMapper, times(1)).createMusic(music);
     }
 
