@@ -57,7 +57,7 @@ public class MusicMapperTest {
     @Test
     @Transactional
     void ミュージックが作成される事() {
-        Music music = new Music(8, "ハルカ", "YOASOBI");
+        Music music = new Music(8, "彗星の魔女", "YOASOBI");
         musicMapper.createMusic(music);
         Optional<Music> actual = Optional.ofNullable(musicMapper.findById(music.getId()));
         assertThat(actual).isPresent();

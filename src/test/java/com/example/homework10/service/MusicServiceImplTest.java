@@ -57,12 +57,13 @@ public class MusicServiceImplTest {
     }
 
     @Test
-    public void ミュージックが作成されること() throws Exception {
-        Music music = new Music(5, "ハルカ", "YOASOBI");
+    public void ミュージックが作成されること() {
+        Music music = new Music(5, "明日への扉", "kiroro");
         doNothing().when(musicMapper).createMusic(music);
 
         musicService.createMusic(music.getTitle(), music.getSinger());
         verify(musicMapper, times(1)).createMusic(music);
+
     }
 
     @Test
