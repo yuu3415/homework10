@@ -58,7 +58,7 @@ public class MusicServiceImplTest {
 
     @Test
     public void ミュージックが作成されること() {
-        Music music = new Music(5, "明日への扉", "kiroro");
+        Music music = new Music(0, "明日への扉", "kiroro");
         doNothing().when(musicMapper).createMusic(music);
 
         musicService.createMusic(music.getTitle(), music.getSinger());
