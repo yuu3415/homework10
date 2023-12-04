@@ -45,13 +45,14 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Music updateMusic(int id, Music updateMusic) throws NotMusicFoundException {
-        if (musicMapper.findById(id) == null) {
-            throw new NotMusicFoundException("Music not found");
-        } else {
-            updateMusic.setId(id);
+        Optional<Music> music = Optional.ofNullable(musicMapper.findById(id));
+        if (music.isPresent()) {
             musicMapper.updateMusic(updateMusic);
             return updateMusic;
+        } else {
+            throw new NotMusicFoundException("Music not found");
         }
+
     }
 
     @Override

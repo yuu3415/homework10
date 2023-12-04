@@ -3,6 +3,7 @@ package com.example.homework10.integrationtest;
 
 import com.example.homework10.entity.Music;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -18,6 +19,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -85,6 +89,7 @@ class MusicApiIntegrationTest {
 
     @Test
     @DataSet(value = "datasets/music.yml")
+    @ExpectedDataSet(value = "datasets/expected_music.yml", ignoreCols = "id")
     @Transactional
     void ミュージックが作成されること() throws Exception {
         Music music = new Music(39, "ハルカ", "YOASOBI");
@@ -98,14 +103,14 @@ class MusicApiIntegrationTest {
                                         }
                                         """))
                         .andExpect(MockMvcResultMatchers.status().isCreated())
-                        .andExpect(MockMvcResultMatchers.content().string("music successfully created id:" + music.getId())).toString();
+                        .andExpect(header().string("Location", matchesPattern("http://localhost:8080/music/\\d+"))).toString();
+
     }
 
     @Test
     @DataSet(value = "datasets/music.yml")
     @Transactional
     void ミュージックが更新されること() throws Exception {
-        Music music = new Music(1, "ハルカ", "YOASOBI");
         String response =
                 mockMvc.perform(MockMvcRequestBuilders.patch("/music/1")
                                 .contentType(MediaType.APPLICATION_JSON)
