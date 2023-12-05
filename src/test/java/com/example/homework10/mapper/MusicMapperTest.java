@@ -39,7 +39,7 @@ public class MusicMapperTest {
     @Test
     @Transactional
     void 指定したIDのミュージックが指定できる事() {
-        Music music = musicMapper.findById(5);
+        Optional<Music> music = musicMapper.findById(5);
         assertThat(music)
                 .isEqualTo(
                         new Music(5, "ハルカ", "YOASOBI")
@@ -50,7 +50,7 @@ public class MusicMapperTest {
     @Transactional
     void 指定したIDがない場合に例外を返す事() {
         int id = 100;
-        Music music = musicMapper.findById(id);
+        Optional<Music> music = musicMapper.findById(id);
         assertThat(music).isNull();
     }
 
@@ -59,7 +59,7 @@ public class MusicMapperTest {
     void ミュージックが作成される事() {
         Music music = new Music(8, "彗星の魔女", "YOASOBI");
         musicMapper.createMusic(music);
-        Optional<Music> actual = Optional.ofNullable(musicMapper.findById(music.getId()));
+        Optional<Music> actual = musicMapper.findById(music.getId());
         assertThat(actual).isPresent();
         assertThat(actual.get()).isEqualTo(music);
         assertThat(actual.get().getTitle()).isEqualTo(music.getTitle());
@@ -70,22 +70,18 @@ public class MusicMapperTest {
     @Test
     @Transactional
     void 更新したミュージックが反映されること() {
-        Optional<Music> music = Optional.ofNullable(musicMapper.findById(5));
+        Optional<Music> music = musicMapper.findById(5);
         assertThat(music).isEqualTo(Optional.of(new Music(5, "ハルカ", "YOASOBI")));
-        music.get().setTitle("炎");
-        music.get().setSinger("LiSA");
-        musicMapper.updateMusic(music.get());
-        Optional<Music> actual = Optional.ofNullable(musicMapper.findById(5));
-        assertThat(actual).isEqualTo(Optional.of(new Music(5, "炎", "LiSA")));
+        musicMapper.updateMusic(5, "ハルカ", "YOASOBI");
     }
 
     @Test
     @Transactional
     void 指定したIDのミュージックが削除されること() {
-        Optional<Music> music = Optional.ofNullable(musicMapper.findById(5));
+        Optional<Music> music = musicMapper.findById(5);
         assertThat(music).isEqualTo(Optional.of(new Music(5, "ハルカ", "YOASOBI")));
         musicMapper.deleteMusic(5);
-        Optional<Music> actual = Optional.ofNullable(musicMapper.findById(5));
+        Optional<Music> actual = musicMapper.findById(5);
         assertThat(actual).isEmpty();
     }
 }

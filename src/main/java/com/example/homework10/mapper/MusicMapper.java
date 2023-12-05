@@ -4,6 +4,7 @@ import com.example.homework10.entity.Music;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 
@@ -12,7 +13,7 @@ public interface MusicMapper {
     List<Music> findAll();
 
     @Select("SELECT * FROM music WHERE id = #{id}")
-    Music findById(int id);
+    Optional<Music> findById(int id);
 
     @Select("SELECT * FROM music WHERE title = #{title}")
     Music findByTitle(String title);
@@ -22,8 +23,9 @@ public interface MusicMapper {
     void createMusic(Music createMusic);
 
     @Update("UPDATE music SET title = #{title}, singer = #{singer} WHERE id = #{id}")
-    void updateMusic(Music updateMusic);
+    void updateMusic(int id, String title, String singer);
 
     @Delete("DELETE FROM music WHERE id = #{id}")
     void deleteMusic(int id);
+
 }

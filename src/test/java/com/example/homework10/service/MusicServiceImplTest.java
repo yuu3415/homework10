@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -58,30 +59,28 @@ public class MusicServiceImplTest {
 
     @Test
     public void ミュージックが作成されること() {
-        Music music = new Music(5, "明日への扉", "kiroro");
+        Music music = new Music("明日への扉", "kiroro");
         doNothing().when(musicMapper).createMusic(music);
 
         musicService.createMusic(music.getTitle(), music.getSinger());
         verify(musicMapper, times(1)).createMusic(music);
-
     }
 
     @Test
     public void 存在するミュージックが更新されること() throws Exception {
         Music music = new Music(5, "ハルカ", "YOASOBI");
-        doNothing().when(musicMapper).updateMusic(music);
+        doNothing().when(musicMapper).updateMusic(music.getId(), music.getTitle(), music.getSinger());
 
-        musicService.updateMusic(5, music);
-        verify(musicMapper, times(1)).updateMusic(music);
+        musicService.updateMusic(5, "ハルカ", "YOASOBI");
+        verify(musicMapper, times(1)).updateMusic(music.getId(), music.getTitle(), music.getSinger());
     }
 
     @Test
     public void 存在しないミュージックが更新されようとすると例外が発生すること() throws Exception {
-        Music music = new Music(5, "ハルカ", "YOASOBI");
-        doThrow(new NotMusicFoundException("Music not found")).when(musicMapper).updateMusic(music);
+        doReturn(Optional.empty()).when(musicMapper).findById(5);
 
-        assertThatThrownBy(() -> musicService.updateMusic(5, music)).isInstanceOfSatisfying(NotMusicFoundException.class, e -> assertThat(e.getMessage()).isEqualTo("Music not found"));
-        verify(musicMapper, times(1)).updateMusic(music);
+        assertThatThrownBy(() -> musicService.updateMusic(5, "ハルカ", "YOASOBI")).isInstanceOfSatisfying(NotMusicFoundException.class, e -> assertThat(e.getMessage()).isEqualTo("Music not found"));
+        verify(musicMapper, times(1)).findById(5);
     }
 
     @Test
