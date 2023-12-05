@@ -1,6 +1,7 @@
 package com.example.homework10.service;
 
 import com.example.homework10.entity.Music;
+import com.example.homework10.exception.NotMusicFoundException;
 
 import java.util.List;
 
@@ -11,8 +12,7 @@ public interface MusicService {
 
     Music createMusic(String title, String singer) throws Exception;
 
-
-    Music updateMusic(int id, Music musicUpdateForm) throws Exception;
+    void updateMusic(int id, String title, String singer) throws NotMusicFoundException;
 
     void deleteMusic(int id);
 

@@ -75,7 +75,7 @@ public class MusicController {
     @PatchMapping("/music/{id}")
     public ResponseEntity<Map<String, String>> update(@PathVariable int id, @Validated @RequestBody MusicUpdateForm musicUpdateForm) throws Exception {
         Music updateMusic = musicUpdateForm.convertToMusic(id, musicUpdateForm);
-        musicService.updateMusic(id, updateMusic);
+        musicService.updateMusic(updateMusic.getId(), updateMusic.getTitle(), updateMusic.getSinger());
         return ResponseEntity.ok(Map.of("message", "music successfully updated"));
     }
 

@@ -8,7 +8,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MusicServiceImpl implements MusicService {
@@ -25,8 +24,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Music findById(int id) {
-        Optional<Music> music = Optional.ofNullable(musicMapper.findById(id));
-        return music.orElseThrow(() -> new NotMusicFoundException("Music not found"));
+        return musicMapper.findById(id).orElseThrow(() -> new NotMusicFoundException("Music not found"));
     }
 
     @Override
@@ -44,14 +42,9 @@ public class MusicServiceImpl implements MusicService {
 
 
     @Override
-    public Music updateMusic(int id, Music updateMusic) throws NotMusicFoundException {
-        Optional<Music> music = Optional.ofNullable(musicMapper.findById(id));
-        if (music.isPresent()) {
-            musicMapper.updateMusic(updateMusic);
-            return updateMusic;
-        } else {
-            throw new NotMusicFoundException("Music not found");
-        }
+    public void updateMusic(int id, String title, String singer) throws NotMusicFoundException {
+        musicMapper.findById(id).orElseThrow(() -> new NotMusicFoundException("Music not found"));
+        musicMapper.updateMusic(id, title, singer);
 
     }
 
